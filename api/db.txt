@@ -1,0 +1,21 @@
+DROP DATABASE parking;
+CREATE DATABASE parking;
+USE parking;
+
+CREATE TABLE entry (
+    entry_id INTEGER(10) NOT NULL AUTO_INCREMENT,
+    plate VARCHAR(11) NOT NULL,
+    slot INTEGER(10) NOT NULL,
+    arrival TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    departure TIMESTAMP,
+    cost INTEGER(10) DEFAULT 0,
+    PRIMARY KEY (entry_id)
+);
+
+CREATE TABLE slot (
+    slot_id INTEGER(10) NOT NULL AUTO_INCREMENT,
+    available TINYINT(1) DEFAULT 1,
+    PRIMARY KEY (slot_id)
+);
+
+ALTER TABLE entry ADD FOREIGN KEY (slot) REFERENCES slot(slot_id);
